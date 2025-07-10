@@ -1,0 +1,236 @@
+// Final customized 21K School Portal Purple Theme (optimized & animated with modern UI)
+
+// Base Background
+const body = document.body;
+body.style.background = '#0a001a';
+body.style.color = '#e6ccff';
+
+// Universal Link Styling
+const style = document.createElement('style');
+style.innerHTML = `
+  a {
+    color: #cc99ff !important;
+    text-shadow: 0 0 4px #a64dff, 0 0 8px #8000ff;
+    transition: 0.3s;
+  }
+  a:hover {
+    color: #ffffff !important;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: #d1a3ff !important;
+    text-shadow: 0 0 6px #9933ff, 0 0 12px #8000ff;
+  }
+  p {
+    color: #e6ccff !important;
+  }
+  button, .Button {
+    background: linear-gradient(90deg, #4b0082, #8000ff);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 2rem; /* modern rounded */
+    box-shadow: 0 0 10px #9933ff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  button:hover, .Button:hover {
+    box-shadow: 0 0 20px #cc66ff;
+  }
+
+  // Active animated class
+  @keyframes darkGradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  ._active-gradient-animated {
+    background: linear-gradient(270deg, #4b0082, #000000);
+    background-size: 400% 400%;
+    animation: darkGradientShift 5s ease infinite;
+    color: white !important;
+    border-radius: 1rem !important;
+  }
+
+  @keyframes purpleGradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes thinShineSweep {
+    0% { left: -50%; top: -50%; }
+    100% { left: 150%; top: 150%; }
+  }
+  .purple-shiny {
+    background: linear-gradient(270deg, #8000ff, #1a001a, #8000ff);
+    background-size: 400% 400%;
+    animation: purpleGradientMove 6s ease-in-out infinite;
+    color: white !important;
+    border-radius: 1rem !important;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .purple-shiny::after {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    animation: thinShineSweep 2.5s linear infinite;
+    transform: rotate(45deg);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .rounded-icon {
+    background: linear-gradient(135deg, #0a001a, #1a0033);
+    border-radius: 50%;
+    padding: 10px;
+    color: #cc99ff;
+    text-shadow: 0 0 6px #9933ff;
+    transition: 0.3s;
+  }
+  .rounded-icon:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #cc99ff;
+  }
+  .animated-bar {
+    background: linear-gradient(270deg, #4b0082, #1a001a);
+    background-size: 300% 300%;
+    animation: darkGradientShift 6s ease-in-out infinite;
+  }
+`;
+document.head.appendChild(style);
+
+// Apply animated styles to active class
+const styledElements = new WeakMap();
+setInterval(() => {
+  document.querySelectorAll('._active').forEach(el => {
+    if (!el.classList.contains('_active-gradient-animated')) {
+      if (!styledElements.has(el)) {
+        styledElements.set(el, {
+          background: el.style.background,
+          color: el.style.color,
+          borderRadius: el.style.borderRadius,
+        });
+      }
+      el.classList.add('_active-gradient-animated');
+    }
+  });
+}, 300);
+
+// Apply shine effect to hero block
+setInterval(() => {
+  const el = document.querySelector('.main-y3ei6l');
+  if (el && !el.classList.contains('purple-shiny')) {
+    el.classList.add('purple-shiny');
+  }
+}, 300);
+
+// Animated glowing gradient text for _main ._label (original version restored)
+(function(){
+  const el = document.querySelector('._main ._label');
+  if (!el) { alert("Element not found!"); return; }
+
+  el.style.backgroundImage = 'linear-gradient(90deg, white, #8000ff, white)';
+  el.style.backgroundSize = '300% auto';
+  el.style.color = 'transparent';
+  el.style.backgroundClip = 'text';
+  el.style.webkitBackgroundClip = 'text';
+  el.style.fontWeight = 'bold';
+  el.style.animation = 'shine 2s linear infinite, glow 1.5s ease-in-out infinite alternate';
+  el.style.textShadow = `
+    0 0 4px #a64dff,
+    0 0 8px #9933ff,
+    0 0 16px #8000ff,
+    0 0 24px white
+  `;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes shine {
+      0% { background-position: 300% center; }
+      100% { background-position: -300% center; }
+    }
+    @keyframes glow {
+      0% {
+        text-shadow:
+          0 0 4px #a64dff,
+          0 0 8px #9933ff,
+          0 0 16px #8000ff,
+          0 0 24px white;
+      }
+      100% {
+        text-shadow:
+          0 0 6px #a64dff,
+          0 0 12px #9933ff,
+          0 0 20px #8000ff,
+          0 0 30px white;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+// Apply to common components
+const selectors = [
+  '._top',
+  '._bottom',
+  '.main-v2f8c4',
+  '.main-zf0xiu',
+  '.main-1tz8zqw',
+  '.main-hp9qcx',
+  '.main-x9v4u5',
+  '.in_container',
+  '._clickable',
+  '.Icon-arrow_up',
+  '.fa-play'
+];
+
+function applyTheme(el) {
+  if (el.classList.contains('_top') || el.classList.contains('_bottom')) {
+    el.classList.add('animated-bar');
+    el.style.color = '#e6ccff';
+    el.querySelectorAll('*').forEach(child => {
+      child.style.color = '#e6ccff';
+      child.style.textShadow = '0 0 6px #9933ff';
+    });
+    return;
+  }
+
+  el.style.background = 'linear-gradient(135deg, #0a001a, #1a0033)';
+  el.style.color = '#e6ccff';
+  el.style.borderRadius = '1rem';
+  el.style.textShadow = '0 0 6px #9933ff';
+
+  if (el.classList.contains('Icon-arrow_up') || el.classList.contains('fa-play')) {
+    el.classList.add('rounded-icon');
+  }
+
+  el.querySelectorAll('*').forEach(child => {
+    child.style.color = '#e6ccff';
+    child.style.textShadow = '0 0 6px #9933ff';
+  });
+}
+
+document.querySelectorAll(selectors.join(',')).forEach(applyTheme);
+
+const observer = new MutationObserver(mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType === 1) {
+        if (selectors.some(sel => node.matches(sel))) {
+          applyTheme(node);
+        }
+        node.querySelectorAll(selectors.join(',')).forEach(applyTheme);
+      }
+    }
+  }
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});

@@ -349,3 +349,27 @@ const widgetObserverPurple = new MutationObserver(mutations => {
 });
 widgetObserverPurple.observe(document.body, { childList: true, subtree: true });
 
+
+
+function styleGoldenWidgetTitle(el) {
+  el.style.background = 'linear-gradient(90deg, #2b1b00, #ffb300)';
+}
+
+// Apply to existing elements
+document.querySelectorAll('.widget-title').forEach(styleGoldenWidgetTitle);
+
+// Observe and style future elements
+const widgetObserverGolden = new MutationObserver(mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType !== 1) continue;
+
+      if (node.classList.contains('widget-title')) {
+        styleGoldenWidgetTitle(node);
+      }
+
+      node.querySelectorAll('.widget-title').forEach(styleGoldenWidgetTitle);
+    }
+  }
+});
+widgetObserverGolden.observe(document.body, { childList: true, subtree: true });

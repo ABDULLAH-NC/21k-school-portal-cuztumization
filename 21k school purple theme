@@ -233,3 +233,30 @@ observer.observe(document.body, {
   childList: true,
   subtree: true
 });
+
+
+function styleTodayElementPurple(el) {
+  el.style.background = 'linear-gradient(135deg, #8000ff, #1a001a)';
+  el.style.color = 'white';
+  el.style.borderRadius = '1rem';
+  el.style.boxShadow = '0 0 8px #9933ff';
+  el.style.fontWeight = 'bold';
+}
+document.querySelectorAll('._today').forEach(styleTodayElementPurple);
+const observerTodayPurple = new MutationObserver(mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType === 1) {
+        if (node.classList.contains('_today')) {
+          styleTodayElementPurple(node);
+        }
+        node.querySelectorAll('._today').forEach(styleTodayElementPurple);
+      }
+    }
+  }
+});
+observerTodayPurple.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+

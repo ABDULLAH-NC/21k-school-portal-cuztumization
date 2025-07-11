@@ -1,15 +1,12 @@
-// 🚫 Prevent theme styles from affecting elements with class "Avatar"
-const avatarExclusionStyle = document.createElement('style');
-avatarExclusionStyle.innerHTML = `
-  .Avatar {
-    background: unset !important;
-    color: unset !important;
-    box-shadow: unset !important;
-    border-radius: unset !important;
-    text-shadow: unset !important;
-  }
-`;
-document.head.appendChild(avatarExclusionStyle);
+// STEP 1: 🧠 Backup original Avatar elements
+const avatarBackups = [];
+document.querySelectorAll('.Avatar').forEach(el => {
+  avatarBackups.push({
+    element: el,
+    html: el.outerHTML,
+    parent: el.parentElement
+  });
+});
 
 
 
@@ -286,5 +283,17 @@ observerFore.observe(document.body, { childList: true, subtree: true });
 
 
 
+// STEP 2: 🔄 Restore Avatar elements after theme is applied
+avatarBackups.forEach(({ element, html, parent }) => {
+  if (!parent) return;
+  const newEl = document.createElement('div');
+  newEl.innerHTML = html;
+  const restored = newEl.firstChild;
+
+  // Replace the modified Avatar with the original one
+  if (element && element.parentNode) {
+    element.replaceWith(restored);
+  }
+});
 
 

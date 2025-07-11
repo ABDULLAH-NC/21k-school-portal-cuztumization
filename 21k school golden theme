@@ -227,3 +227,37 @@ const observer = new MutationObserver(mutations => {
     }
   }
 });
+
+
+
+
+// Function to apply golden style to _today
+function styleTodayElement(el) {
+  el.style.background = 'linear-gradient(135deg, #ffd700, #ffa500)';
+  el.style.color = '#000';
+  el.style.borderRadius = '1rem';
+  el.style.boxShadow = '0 0 8px #ffcc00';
+  el.style.fontWeight = 'bold';
+}
+
+// Apply to already existing elements
+document.querySelectorAll('._today').forEach(styleTodayElement);
+
+// Watch for future _today elements
+const observerToday = new MutationObserver(mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType === 1) {
+        if (node.classList.contains('_today')) {
+          styleTodayElement(node);
+        }
+        node.querySelectorAll('._today').forEach(styleTodayElement);
+      }
+    }
+  }
+});
+observerToday.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+

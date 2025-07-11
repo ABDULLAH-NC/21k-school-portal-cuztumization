@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
 // Base Background
 document.body.style.background = '#2b1b00';
 document.body.style.color = '#ffe699';

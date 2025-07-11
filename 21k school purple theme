@@ -227,11 +227,3 @@ observerFore.observe(document.body, { childList: true, subtree: true });
 
 
 
-.Avatar {
-  border-radius: 50% !important;
-  all: unset;
-  display: inline-block;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-}
-

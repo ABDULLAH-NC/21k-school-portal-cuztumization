@@ -1,11 +1,10 @@
 // Base Background
-const body = document.body;
-body.style.background = '#2b1b00'; // Deep golden brown
-body.style.color = '#ffe699'; // Warm gold text
+document.body.style.background = '#2b1b00';
+document.body.style.color = '#ffe699';
 
 // Universal Link Styling
-const style = document.createElement('style');
-style.innerHTML = `
+const goldenStyle = document.createElement('style');
+goldenStyle.innerHTML = `
   a {
     color: #ffcc33 !important;
     text-shadow: 0 0 4px #ffb300, 0 0 8px #ff8f00;
@@ -41,6 +40,7 @@ style.innerHTML = `
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
+
   ._active-gradient-animated {
     background: linear-gradient(270deg, #ffb300, #2b1b00);
     background-size: 400% 400%;
@@ -59,6 +59,7 @@ style.innerHTML = `
     0% { left: -50%; top: -50%; }
     100% { left: 150%; top: 150%; }
   }
+
   .purple-shiny {
     background: linear-gradient(270deg, #ffb300, #2b1b00, #ffb300);
     background-size: 400% 400%;
@@ -69,6 +70,7 @@ style.innerHTML = `
     overflow: hidden;
     z-index: 0;
   }
+
   .purple-shiny::after {
     content: '';
     position: absolute;
@@ -89,6 +91,7 @@ style.innerHTML = `
     text-shadow: 0 0 6px #ffb300;
     transition: 0.3s;
   }
+
   .rounded-icon:hover {
     color: #ffffff;
     text-shadow: 0 0 10px #ffeb99;
@@ -99,38 +102,27 @@ style.innerHTML = `
     background-size: 300% 300%;
     animation: darkGradientShift 6s ease-in-out infinite;
   }
-`;
-document.head.appendChild(style);
 
-// Apply animated styles to active class
-const styledElements = new WeakMap();
-setInterval(() => {
-  document.querySelectorAll('._active').forEach(el => {
-    if (!el.classList.contains('_active-gradient-animated')) {
-      if (!styledElements.has(el)) {
-        styledElements.set(el, {
-          background: el.style.background,
-          color: el.style.color,
-          borderRadius: el.style.borderRadius,
-        });
-      }
-      el.classList.add('_active-gradient-animated');
-    }
-  });
-}, 300);
-
-// Apply shine effect to hero block
-setInterval(() => {
-  const el = document.querySelector('.main-y3ei6l');
-  if (el && !el.classList.contains('purple-shiny')) {
-    el.classList.add('purple-shiny');
+  .Icon-arrow_up {
+    background: linear-gradient(135deg, #2b1b00, #3b2900);
+    border-radius: 50%;
+    padding: 10px;
+    color: #ffcc33;
+    text-shadow: 0 0 6px #ffb300;
+    transition: 0.3s;
   }
-}, 300);
+
+  .Icon-arrow_up:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffeb99;
+  }
+`;
+document.head.appendChild(goldenStyle);
 
 // Animated glowing gradient text for _main ._label
-(function(){
+(function () {
   const el = document.querySelector('._main ._label');
-  if (!el) { alert("Element not found!"); return; }
+  if (!el) return;
 
   el.style.backgroundImage = 'linear-gradient(90deg, white, #ffb300, white)';
   el.style.backgroundSize = '300% auto';
@@ -146,8 +138,8 @@ setInterval(() => {
     0 0 24px white
   `;
 
-  const style = document.createElement('style');
-  style.textContent = `
+  const animationStyle = document.createElement('style');
+  animationStyle.textContent = `
     @keyframes shine {
       0% { background-position: 300% center; }
       100% { background-position: -300% center; }
@@ -169,11 +161,11 @@ setInterval(() => {
       }
     }
   `;
-  document.head.appendChild(style);
+  document.head.appendChild(animationStyle);
 })();
 
 // Apply to common components
-const selectors = [
+const goldenSelectors = [
   '._top',
   '._bottom',
   '.main-v2f8c4',
@@ -187,7 +179,7 @@ const selectors = [
   '.fa-play'
 ];
 
-function applyTheme(el) {
+function applyGoldenTheme(el) {
   if (el.classList.contains('_top') || el.classList.contains('_bottom')) {
     el.classList.add('animated-bar');
     el.style.color = '#ffe699';
@@ -213,25 +205,51 @@ function applyTheme(el) {
   });
 }
 
-document.querySelectorAll(selectors.join(',')).forEach(applyTheme);
+document.querySelectorAll(goldenSelectors.join(',')).forEach(applyGoldenTheme);
 
-const observer = new MutationObserver(mutations => {
+const goldenObserver = new MutationObserver(mutations => {
   for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
       if (node.nodeType === 1) {
-        if (selectors.some(sel => node.matches(sel))) {
-          applyTheme(node);
+        if (goldenSelectors.some(sel => node.matches(sel))) {
+          applyGoldenTheme(node);
         }
-        node.querySelectorAll(selectors.join(',')).forEach(applyTheme);
+        node.querySelectorAll(goldenSelectors.join(',')).forEach(applyGoldenTheme);
       }
     }
   }
 });
+goldenObserver.observe(document.body, {
+  childList: true,
+  subtree: true
+});
 
+// Apply animated styles to _active elements
+const goldenStyledElements = new WeakMap();
+setInterval(() => {
+  document.querySelectorAll('._active').forEach(el => {
+    if (!el.classList.contains('_active-gradient-animated')) {
+      if (!goldenStyledElements.has(el)) {
+        goldenStyledElements.set(el, {
+          background: el.style.background,
+          color: el.style.color,
+          borderRadius: el.style.borderRadius,
+        });
+      }
+      el.classList.add('_active-gradient-animated');
+    }
+  });
+}, 300);
 
+// Shine effect on hero block
+setInterval(() => {
+  const el = document.querySelector('.main-y3ei6l');
+  if (el && !el.classList.contains('purple-shiny')) {
+    el.classList.add('purple-shiny');
+  }
+}, 300);
 
-
-// Function to apply golden style to _today
+// Style _today
 function styleTodayElement(el) {
   el.style.background = 'linear-gradient(135deg, #ffd700, #ffa500)';
   el.style.color = '#000';
@@ -239,11 +257,7 @@ function styleTodayElement(el) {
   el.style.boxShadow = '0 0 8px #ffcc00';
   el.style.fontWeight = 'bold';
 }
-
-// Apply to already existing elements
 document.querySelectorAll('._today').forEach(styleTodayElement);
-
-// Watch for future _today elements
 const observerToday = new MutationObserver(mutations => {
   for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
@@ -261,9 +275,7 @@ observerToday.observe(document.body, {
   subtree: true
 });
 
-
-
-
+// Style _fore
 document.querySelectorAll('._fore').forEach(el => {
   el.style.background = 'linear-gradient(135deg, #4d3900, #b38728)';
   el.style.color = '#fff8dc';

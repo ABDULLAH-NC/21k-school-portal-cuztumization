@@ -324,3 +324,28 @@ const calendarObserverPurple = new MutationObserver(mutations => {
 });
 calendarObserverPurple.observe(document.body, { childList: true, subtree: true });
 
+
+
+function stylePurpleWidgetTitle(el) {
+  el.style.background = 'linear-gradient(90deg, #1a001a, #8000ff)';
+}
+
+// Apply to existing elements
+document.querySelectorAll('.widget-title').forEach(stylePurpleWidgetTitle);
+
+// Observe and style future elements
+const widgetObserverPurple = new MutationObserver(mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType !== 1) continue;
+
+      if (node.classList.contains('widget-title')) {
+        stylePurpleWidgetTitle(node);
+      }
+
+      node.querySelectorAll('.widget-title').forEach(stylePurpleWidgetTitle);
+    }
+  }
+});
+widgetObserverPurple.observe(document.body, { childList: true, subtree: true });
+

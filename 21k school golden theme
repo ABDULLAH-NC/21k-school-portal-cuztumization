@@ -1,24 +1,29 @@
-// ✅ FULL PROTECTION for .Avatar - don't let theme affect it at all
-const style = document.createElement('style');
-style.innerHTML = `
+// ✅ Full protection for Avatar (square image not overridden)
+const avatarSafeStyle = document.createElement('style');
+avatarSafeStyle.innerHTML = `
   .Avatar {
-    all: initial !important;
-    display: inline-block !important;
-    position: relative !important;
-    overflow: hidden !important;
+    background: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    position: static !important;
   }
 
-
-  .Avatar img {
-    all: initial !important;
+  .Avatar img, .Avatar > div, .Avatar * {
+    all: unset !important;
+    display: block !important;
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    border-radius: 50% !important;
-    display: block !important;
   }
 `;
-document.head.appendChild(style);
+document.head.appendChild(avatarSafeStyle);
+
+
+if (el.classList.contains('Avatar')) return;
 
 
 

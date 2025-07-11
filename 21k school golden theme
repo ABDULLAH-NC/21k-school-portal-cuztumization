@@ -1,10 +1,23 @@
-// Step 1: Clone all .Avatar elements before theme loads
-const avatarMap = new Map();
+// ✅ FULL PROTECTION for .Avatar - don't let theme affect it at all
+const style = document.createElement('style');
+style.innerHTML = `
+  .Avatar {
+    all: initial !important;
+    display: inline-block !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
 
-document.querySelectorAll('.Avatar').forEach(el => {
-  const clone = el.cloneNode(true);
-  avatarMap.set(el, clone);
-});
+  .Avatar img {
+    all: initial !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    display: block !important;
+  }
+`;
+document.head.appendChild(style);
 
 
 

@@ -261,3 +261,66 @@ const observerFore = new MutationObserver(mutations => {
 observerFore.observe(document.body, { childList: true, subtree: true });
 
 
+// 🟣 PURPLE STYLING FOR _day AND _note
+function stylePurpleDay(el) {
+  el.style.background = 'linear-gradient(135deg, #b266ff, #8000ff)';
+  el.style.color = '#fff';
+  el.style.borderRadius = '1rem';
+  el.style.boxShadow = '0 0 8px #cc99ff';
+  el.style.fontWeight = 'bold';
+}
+function stylePurpleNote(el) {
+  el.style.background = 'linear-gradient(135deg, #f3e6ff, #d1a3ff)';
+  el.style.color = '#1a001a';
+  el.style.borderRadius = '0.75rem';
+  el.style.padding = '8px';
+  el.style.boxShadow = '0 0 10px #cc66ff';
+}
+
+// Apply immediately to existing
+document.querySelectorAll('._day').forEach(stylePurpleDay);
+document.querySelectorAll('._note').forEach(stylePurpleNote);
+
+// Apply later when added
+const observerPurple = new MutationObserver(mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType !== 1) continue;
+
+      if (node.classList.contains('_day')) stylePurpleDay(node);
+      if (node.classList.contains('_note')) stylePurpleNote(node);
+
+      node.querySelectorAll('._day').forEach(stylePurpleDay);
+      node.querySelectorAll('._note').forEach(stylePurpleNote);
+    }
+  }
+});
+observerPurple.observe(document.body, { childList: true, subtree: true });
+
+
+
+function stylePurpleCalendar(el) {
+  el.style.color = '#cc99ff';
+  el.style.textShadow = '0 0 6px #9933ff';
+  el.style.background = 'none';
+}
+
+// Existing elements
+document.querySelectorAll('.fa-calendar-alt').forEach(stylePurpleCalendar);
+
+// Observe for future elements
+const calendarObserverPurple = new MutationObserver(mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType !== 1) continue;
+
+      if (node.classList.contains('fa-calendar-alt')) {
+        stylePurpleCalendar(node);
+      }
+
+      node.querySelectorAll('.fa-calendar-alt').forEach(stylePurpleCalendar);
+    }
+  }
+});
+calendarObserverPurple.observe(document.body, { childList: true, subtree: true });
+

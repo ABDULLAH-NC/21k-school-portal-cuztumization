@@ -260,13 +260,3 @@ const observerFore = new MutationObserver(mutations => {
 });
 observerFore.observe(document.body, { childList: true, subtree: true });
 
-
-
-// Step 2: Replace the styled Avatar elements with their original clones
-avatarMap.forEach((clone, original) => {
-  if (original.isConnected && original.parentNode) {
-    original.replaceWith(clone);
-  }
-});
-
-

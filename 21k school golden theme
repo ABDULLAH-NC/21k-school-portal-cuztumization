@@ -1,12 +1,11 @@
-// STEP 1: 🧠 Backup original Avatar elements
-const avatarBackups = [];
+// Step 1: Clone all .Avatar elements before theme loads
+const avatarMap = new Map();
+
 document.querySelectorAll('.Avatar').forEach(el => {
-  avatarBackups.push({
-    element: el,
-    html: el.outerHTML,
-    parent: el.parentElement
-  });
+  const clone = el.cloneNode(true);
+  avatarMap.set(el, clone);
 });
+
 
 
 
@@ -283,16 +282,10 @@ observerFore.observe(document.body, { childList: true, subtree: true });
 
 
 
-// STEP 2: 🔄 Restore Avatar elements after theme is applied
-avatarBackups.forEach(({ element, html, parent }) => {
-  if (!parent) return;
-  const newEl = document.createElement('div');
-  newEl.innerHTML = html;
-  const restored = newEl.firstChild;
-
-  // Replace the modified Avatar with the original one
-  if (element && element.parentNode) {
-    element.replaceWith(restored);
+// Step 2: Replace the styled Avatar elements with their original clones
+avatarMap.forEach((clone, original) => {
+  if (original.isConnected && original.parentNode) {
+    original.replaceWith(clone);
   }
 });
 

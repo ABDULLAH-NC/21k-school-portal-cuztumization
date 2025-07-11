@@ -21,6 +21,16 @@ style.innerHTML = `
   }
   p {
     color: #e6ccff !important;
+
+
+document.querySelectorAll('._fore').forEach(el => {
+  el.style.background = 'linear-gradient(135deg, #2c003e, #4b006e)';
+  el.style.color = '#e6ccff';
+  el.style.borderRadius = '1rem';
+  el.style.boxShadow = '0 0 12px #9933ff';
+  el.style.textShadow = '0 0 6px #a64dff';
+});
+
   }
   button, .Button {
     background: linear-gradient(90deg, #4b0082, #8000ff);

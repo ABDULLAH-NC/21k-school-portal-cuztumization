@@ -1,3 +1,30 @@
+// 🚫 Prevent theme styles from affecting Avatar circles
+const skipSelector = 'div._circle.Avatar';
+
+const skipStyle = document.createElement('style');
+skipStyle.innerHTML = `
+  ${skipSelector} {
+    /* Do NOT apply any custom theme overrides */
+    background: unset !important;
+    color: unset !important;
+    box-shadow: unset !important;
+    border-radius: unset !important;
+    text-shadow: unset !important;
+  }
+`;
+document.head.appendChild(skipStyle);
+
+
+
+
+
+
+
+
+
+
+
+
 // Base Background
 document.body.style.background = '#2b1b00';
 document.body.style.color = '#ffe699';

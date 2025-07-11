@@ -1,9 +1,8 @@
-// PURPLE THEME SCRIPT
-
 // Base Background
 document.body.style.background = '#0a001a';
 document.body.style.color = '#e6ccff';
 
+// Universal Link Styling
 const purpleStyle = document.createElement('style');
 purpleStyle.innerHTML = `
   a {
@@ -35,6 +34,13 @@ purpleStyle.innerHTML = `
   button:hover, .Button:hover {
     box-shadow: 0 0 20px #cc66ff;
   }
+
+  @keyframes darkGradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   ._active-gradient-animated {
     background: linear-gradient(270deg, #4b0082, #000000);
     background-size: 400% 400%;
@@ -42,11 +48,18 @@ purpleStyle.innerHTML = `
     color: white !important;
     border-radius: 1rem !important;
   }
-  @keyframes darkGradientShift {
+
+  @keyframes purpleGradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
+
+  @keyframes thinShineSweep {
+    0% { left: -50%; top: -50%; }
+    100% { left: 150%; top: 150%; }
+  }
+
   .purple-shiny {
     background: linear-gradient(270deg, #8000ff, #1a001a, #8000ff);
     background-size: 400% 400%;
@@ -57,11 +70,7 @@ purpleStyle.innerHTML = `
     overflow: hidden;
     z-index: 0;
   }
-  @keyframes purpleGradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+
   .purple-shiny::after {
     content: '';
     position: absolute;
@@ -73,11 +82,8 @@ purpleStyle.innerHTML = `
     pointer-events: none;
     z-index: 1;
   }
-  @keyframes thinShineSweep {
-    0% { left: -50%; top: -50%; }
-    100% { left: 150%; top: 150%; }
-  }
-  .rounded-icon, .Icon-arrow_up {
+
+  .rounded-icon {
     background: linear-gradient(135deg, #0a001a, #1a0033);
     border-radius: 50%;
     padding: 10px;
@@ -85,28 +91,39 @@ purpleStyle.innerHTML = `
     text-shadow: 0 0 6px #9933ff;
     transition: 0.3s;
   }
-  .rounded-icon:hover, .Icon-arrow_up:hover {
+
+  .rounded-icon:hover {
     color: #ffffff;
     text-shadow: 0 0 10px #cc99ff;
   }
+
   .animated-bar {
     background: linear-gradient(270deg, #4b0082, #1a001a);
     background-size: 300% 300%;
     animation: darkGradientShift 6s ease-in-out infinite;
   }
-  .Avatar {
-    border-radius: 50% !important;
-    all: unset;
-    display: inline-block;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
+
+  .Icon-arrow_up {
+    background: linear-gradient(135deg, #0a001a, #1a0033);
+    border-radius: 50%;
+    padding: 10px;
+    color: #cc99ff;
+    text-shadow: 0 0 6px #9933ff;
+    transition: 0.3s;
+  }
+
+  .Icon-arrow_up:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #cc99ff;
   }
 `;
 document.head.appendChild(purpleStyle);
 
+// Glowing gradient text
 (function () {
   const el = document.querySelector('._main ._label');
   if (!el) return;
+
   el.style.backgroundImage = 'linear-gradient(90deg, white, #8000ff, white)';
   el.style.backgroundSize = '300% auto';
   el.style.color = 'transparent';
@@ -114,16 +131,23 @@ document.head.appendChild(purpleStyle);
   el.style.webkitBackgroundClip = 'text';
   el.style.fontWeight = 'bold';
   el.style.animation = 'shine 2s linear infinite, glow 1.5s ease-in-out infinite alternate';
-  el.style.textShadow = '0 0 4px #a64dff, 0 0 8px #9933ff, 0 0 16px #8000ff, 0 0 24px white';
+  el.style.textShadow = `
+    0 0 4px #a64dff,
+    0 0 8px #9933ff,
+    0 0 16px #8000ff,
+    0 0 24px white
+  `;
 })();
 
-const selectors = [
+// Apply to common components
+const purpleSelectors = [
   '._top', '._bottom',
-  '.main-v2f8c4', '.main-zf0xiu', '.main-1tz8zqw', '.main-hp9qcx', '.main-x9v4u5',
-  '.in_container', '._clickable', '.Icon-arrow_up', '.fa-play'
+  '.main-v2f8c4', '.main-zf0xiu', '.main-1tz8zqw',
+  '.main-hp9qcx', '.main-x9v4u5', '.in_container',
+  '._clickable', '.Icon-arrow_up', '.fa-play'
 ];
 
-function applyTheme(el) {
+function applyPurpleTheme(el) {
   if (el.classList.contains('_top') || el.classList.contains('_bottom')) {
     el.classList.add('animated-bar');
     el.style.color = '#e6ccff';
@@ -133,42 +157,45 @@ function applyTheme(el) {
     });
     return;
   }
+
   el.style.background = 'linear-gradient(135deg, #0a001a, #1a0033)';
   el.style.color = '#e6ccff';
   el.style.borderRadius = '1rem';
   el.style.textShadow = '0 0 6px #9933ff';
+
   if (el.classList.contains('Icon-arrow_up') || el.classList.contains('fa-play')) {
     el.classList.add('rounded-icon');
   }
+
   el.querySelectorAll('*').forEach(child => {
     child.style.color = '#e6ccff';
     child.style.textShadow = '0 0 6px #9933ff';
   });
 }
 
-document.querySelectorAll(selectors.join(',')).forEach(applyTheme);
+document.querySelectorAll(purpleSelectors.join(',')).forEach(applyPurpleTheme);
 
-const observer = new MutationObserver(mutations => {
+const purpleObserver = new MutationObserver(mutations => {
   for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
       if (node.nodeType === 1) {
-        if (selectors.some(sel => node.matches(sel))) {
-          applyTheme(node);
+        if (purpleSelectors.some(sel => node.matches(sel))) {
+          applyPurpleTheme(node);
         }
-        node.querySelectorAll(selectors.join(',')).forEach(applyTheme);
+        node.querySelectorAll(purpleSelectors.join(',')).forEach(applyPurpleTheme);
       }
     }
   }
 });
-observer.observe(document.body, { childList: true, subtree: true });
+purpleObserver.observe(document.body, { childList: true, subtree: true });
 
-// _active
-const styledElements = new WeakMap();
+// _active animation
+const purpleStyledElements = new WeakMap();
 setInterval(() => {
   document.querySelectorAll('._active').forEach(el => {
     if (!el.classList.contains('_active-gradient-animated')) {
-      if (!styledElements.has(el)) {
-        styledElements.set(el, {
+      if (!purpleStyledElements.has(el)) {
+        purpleStyledElements.set(el, {
           background: el.style.background,
           color: el.style.color,
           borderRadius: el.style.borderRadius,
@@ -179,28 +206,38 @@ setInterval(() => {
   });
 }, 300);
 
-function styleTodayElementPurple(el) {
+// Shine effect on hero block
+setInterval(() => {
+  const el = document.querySelector('.main-y3ei6l');
+  if (el && !el.classList.contains('purple-shiny')) {
+    el.classList.add('purple-shiny');
+  }
+}, 300);
+
+// _today styling
+function styleTodayElement(el) {
   el.style.background = 'linear-gradient(135deg, #8000ff, #1a001a)';
   el.style.color = 'white';
   el.style.borderRadius = '1rem';
   el.style.boxShadow = '0 0 8px #9933ff';
   el.style.fontWeight = 'bold';
 }
-document.querySelectorAll('._today').forEach(styleTodayElementPurple);
-const observerTodayPurple = new MutationObserver(mutations => {
+document.querySelectorAll('._today').forEach(styleTodayElement);
+const observerToday = new MutationObserver(mutations => {
   for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
       if (node.nodeType === 1) {
         if (node.classList.contains('_today')) {
-          styleTodayElementPurple(node);
+          styleTodayElement(node);
         }
-        node.querySelectorAll('._today').forEach(styleTodayElementPurple);
+        node.querySelectorAll('._today').forEach(styleTodayElement);
       }
     }
   }
 });
-observerTodayPurple.observe(document.body, { childList: true, subtree: true });
+observerToday.observe(document.body, { childList: true, subtree: true });
 
+// _fore styling + observer
 function styleForeElement(el) {
   el.style.background = 'linear-gradient(135deg, #2c003e, #4b006e)';
   el.style.color = '#e6ccff';
@@ -222,8 +259,5 @@ const observerFore = new MutationObserver(mutations => {
   }
 });
 observerFore.observe(document.body, { childList: true, subtree: true });
-
-
-
 
 

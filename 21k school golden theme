@@ -262,7 +262,6 @@ observerFore.observe(document.body, { childList: true, subtree: true });
 
 
 
-
 // 🟡 GOLDEN STYLING FOR _day AND _note
 function styleGoldenDay(el) {
   el.style.background = 'linear-gradient(135deg, #ffdd66, #ffaa00)';
@@ -300,4 +299,29 @@ const observerGolden = new MutationObserver(mutations => {
 observerGolden.observe(document.body, { childList: true, subtree: true });
 
 
+
+function styleGoldenCalendar(el) {
+  el.style.color = '#ffcc33';
+  el.style.textShadow = '0 0 6px #ffb300';
+  el.style.background = 'none';
+}
+
+// Existing elements
+document.querySelectorAll('.fa-calendar-alt').forEach(styleGoldenCalendar);
+
+// Observe for future elements
+const calendarObserverGolden = new MutationObserver(mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType !== 1) continue;
+
+      if (node.classList.contains('fa-calendar-alt')) {
+        styleGoldenCalendar(node);
+      }
+
+      node.querySelectorAll('.fa-calendar-alt').forEach(styleGoldenCalendar);
+    }
+  }
+});
+calendarObserverGolden.observe(document.body, { childList: true, subtree: true });
 

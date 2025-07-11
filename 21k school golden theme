@@ -1,10 +1,7 @@
-// 🚫 Prevent theme styles from affecting Avatar circles
-const skipSelector = 'div._circle.Avatar';
-
-const skipStyle = document.createElement('style');
-skipStyle.innerHTML = `
-  ${skipSelector} {
-    /* Do NOT apply any custom theme overrides */
+// 🚫 Prevent theme styles from affecting elements with class "Avatar"
+const avatarExclusionStyle = document.createElement('style');
+avatarExclusionStyle.innerHTML = `
+  .Avatar {
     background: unset !important;
     color: unset !important;
     box-shadow: unset !important;
@@ -12,7 +9,7 @@ skipStyle.innerHTML = `
     text-shadow: unset !important;
   }
 `;
-document.head.appendChild(skipStyle);
+document.head.appendChild(avatarExclusionStyle);
 
 
 

@@ -8,6 +8,7 @@ style.innerHTML = `
     overflow: hidden !important;
   }
 
+
   .Avatar img {
     all: initial !important;
     width: 100% !important;

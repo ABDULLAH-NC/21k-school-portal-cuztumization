@@ -261,3 +261,13 @@ observerToday.observe(document.body, {
   subtree: true
 });
 
+
+
+
+document.querySelectorAll('._fore').forEach(el => {
+  el.style.background = 'linear-gradient(135deg, #4d3900, #b38728)';
+  el.style.color = '#fff8dc';
+  el.style.borderRadius = '1rem';
+  el.style.boxShadow = '0 0 12px #ffaa00';
+  el.style.textShadow = '0 0 6px #ffcc66';
+});

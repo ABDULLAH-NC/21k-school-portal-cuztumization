@@ -1,8 +1,10 @@
+// GOLDEN THEME SCRIPT
+
 // Base Background
 document.body.style.background = '#2b1b00';
 document.body.style.color = '#ffe699';
 
-// Universal Link Styling
+// Universal Styling
 const goldenStyle = document.createElement('style');
 goldenStyle.innerHTML = `
   a {
@@ -34,13 +36,6 @@ goldenStyle.innerHTML = `
   button:hover, .Button:hover {
     box-shadow: 0 0 20px #ffe082;
   }
-
-  @keyframes darkGradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
   ._active-gradient-animated {
     background: linear-gradient(270deg, #ffb300, #2b1b00);
     background-size: 400% 400%;
@@ -48,18 +43,11 @@ goldenStyle.innerHTML = `
     color: white !important;
     border-radius: 1rem !important;
   }
-
-  @keyframes goldenGradientMove {
+  @keyframes darkGradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
-
-  @keyframes thinShineSweep {
-    0% { left: -50%; top: -50%; }
-    100% { left: 150%; top: 150%; }
-  }
-
   .purple-shiny {
     background: linear-gradient(270deg, #ffb300, #2b1b00, #ffb300);
     background-size: 400% 400%;
@@ -70,7 +58,11 @@ goldenStyle.innerHTML = `
     overflow: hidden;
     z-index: 0;
   }
-
+  @keyframes goldenGradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
   .purple-shiny::after {
     content: '';
     position: absolute;
@@ -82,8 +74,11 @@ goldenStyle.innerHTML = `
     pointer-events: none;
     z-index: 1;
   }
-
-  .rounded-icon {
+  @keyframes thinShineSweep {
+    0% { left: -50%; top: -50%; }
+    100% { left: 150%; top: 150%; }
+  }
+  .rounded-icon, .Icon-arrow_up {
     background: linear-gradient(135deg, #2b1b00, #3b2900);
     border-radius: 50%;
     padding: 10px;
@@ -91,39 +86,29 @@ goldenStyle.innerHTML = `
     text-shadow: 0 0 6px #ffb300;
     transition: 0.3s;
   }
-
-  .rounded-icon:hover {
+  .rounded-icon:hover, .Icon-arrow_up:hover {
     color: #ffffff;
     text-shadow: 0 0 10px #ffeb99;
   }
-
   .animated-bar {
     background: linear-gradient(270deg, #ffb300, #3b2900);
     background-size: 300% 300%;
     animation: darkGradientShift 6s ease-in-out infinite;
   }
-
-  .Icon-arrow_up {
-    background: linear-gradient(135deg, #2b1b00, #3b2900);
-    border-radius: 50%;
-    padding: 10px;
-    color: #ffcc33;
-    text-shadow: 0 0 6px #ffb300;
-    transition: 0.3s;
-  }
-
-  .Icon-arrow_up:hover {
-    color: #ffffff;
-    text-shadow: 0 0 10px #ffeb99;
+  .Avatar {
+    border-radius: 50% !important;
+    all: unset;
+    display: inline-block;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
   }
 `;
 document.head.appendChild(goldenStyle);
 
-// Animated glowing gradient text for _main ._label
+// _label gradient animation
 (function () {
   const el = document.querySelector('._main ._label');
   if (!el) return;
-
   el.style.backgroundImage = 'linear-gradient(90deg, white, #ffb300, white)';
   el.style.backgroundSize = '300% auto';
   el.style.color = 'transparent';
@@ -131,55 +116,17 @@ document.head.appendChild(goldenStyle);
   el.style.webkitBackgroundClip = 'text';
   el.style.fontWeight = 'bold';
   el.style.animation = 'shine 2s linear infinite, glow 1.5s ease-in-out infinite alternate';
-  el.style.textShadow = `
-    0 0 4px #ffd54f,
-    0 0 8px #fbc02d,
-    0 0 16px #ffb300,
-    0 0 24px white
-  `;
-
-  const animationStyle = document.createElement('style');
-  animationStyle.textContent = `
-    @keyframes shine {
-      0% { background-position: 300% center; }
-      100% { background-position: -300% center; }
-    }
-    @keyframes glow {
-      0% {
-        text-shadow:
-          0 0 4px #ffd54f,
-          0 0 8px #fbc02d,
-          0 0 16px #ffb300,
-          0 0 24px white;
-      }
-      100% {
-        text-shadow:
-          0 0 6px #ffd54f,
-          0 0 12px #fbc02d,
-          0 0 20px #ffb300,
-          0 0 30px white;
-      }
-    }
-  `;
-  document.head.appendChild(animationStyle);
+  el.style.textShadow = '0 0 4px #ffd54f, 0 0 8px #fbc02d, 0 0 16px #ffb300, 0 0 24px white';
 })();
 
-// Apply to common components
-const goldenSelectors = [
-  '._top',
-  '._bottom',
-  '.main-v2f8c4',
-  '.main-zf0xiu',
-  '.main-1tz8zqw',
-  '.main-hp9qcx',
-  '.main-x9v4u5',
-  '.in_container',
-  '._clickable',
-  '.Icon-arrow_up',
-  '.fa-play'
+// Apply style to common components
+const selectors = [
+  '._top', '._bottom',
+  '.main-v2f8c4', '.main-zf0xiu', '.main-1tz8zqw', '.main-hp9qcx', '.main-x9v4u5',
+  '.in_container', '._clickable', '.Icon-arrow_up', '.fa-play'
 ];
 
-function applyGoldenTheme(el) {
+function applyTheme(el) {
   if (el.classList.contains('_top') || el.classList.contains('_bottom')) {
     el.classList.add('animated-bar');
     el.style.color = '#ffe699';
@@ -189,48 +136,42 @@ function applyGoldenTheme(el) {
     });
     return;
   }
-
   el.style.background = 'linear-gradient(135deg, #2b1b00, #3b2900)';
   el.style.color = '#ffe699';
   el.style.borderRadius = '1rem';
   el.style.textShadow = '0 0 6px #ffb300';
-
   if (el.classList.contains('Icon-arrow_up') || el.classList.contains('fa-play')) {
     el.classList.add('rounded-icon');
   }
-
   el.querySelectorAll('*').forEach(child => {
     child.style.color = '#ffe699';
     child.style.textShadow = '0 0 6px #ffb300';
   });
 }
 
-document.querySelectorAll(goldenSelectors.join(',')).forEach(applyGoldenTheme);
+document.querySelectorAll(selectors.join(',')).forEach(applyTheme);
 
-const goldenObserver = new MutationObserver(mutations => {
+const observer = new MutationObserver(mutations => {
   for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
       if (node.nodeType === 1) {
-        if (goldenSelectors.some(sel => node.matches(sel))) {
-          applyGoldenTheme(node);
+        if (selectors.some(sel => node.matches(sel))) {
+          applyTheme(node);
         }
-        node.querySelectorAll(goldenSelectors.join(',')).forEach(applyGoldenTheme);
+        node.querySelectorAll(selectors.join(',')).forEach(applyTheme);
       }
     }
   }
 });
-goldenObserver.observe(document.body, {
-  childList: true,
-  subtree: true
-});
+observer.observe(document.body, { childList: true, subtree: true });
 
-// Apply animated styles to _active elements
-const goldenStyledElements = new WeakMap();
+// _active animation
+const styledElements = new WeakMap();
 setInterval(() => {
   document.querySelectorAll('._active').forEach(el => {
     if (!el.classList.contains('_active-gradient-animated')) {
-      if (!goldenStyledElements.has(el)) {
-        goldenStyledElements.set(el, {
+      if (!styledElements.has(el)) {
+        styledElements.set(el, {
           background: el.style.background,
           color: el.style.color,
           borderRadius: el.style.borderRadius,
@@ -241,15 +182,7 @@ setInterval(() => {
   });
 }, 300);
 
-// Shine effect on hero block
-setInterval(() => {
-  const el = document.querySelector('.main-y3ei6l');
-  if (el && !el.classList.contains('purple-shiny')) {
-    el.classList.add('purple-shiny');
-  }
-}, 300);
-
-// Style _today
+// _today styling
 function styleTodayElement(el) {
   el.style.background = 'linear-gradient(135deg, #ffd700, #ffa500)';
   el.style.color = '#000';
@@ -270,16 +203,27 @@ const observerToday = new MutationObserver(mutations => {
     }
   }
 });
-observerToday.observe(document.body, {
-  childList: true,
-  subtree: true
-});
+observerToday.observe(document.body, { childList: true, subtree: true });
 
-// Style _fore
-document.querySelectorAll('._fore').forEach(el => {
+// _fore styling
+function styleForeElement(el) {
   el.style.background = 'linear-gradient(135deg, #4d3900, #b38728)';
   el.style.color = '#fff8dc';
   el.style.borderRadius = '1rem';
   el.style.boxShadow = '0 0 12px #ffaa00';
   el.style.textShadow = '0 0 6px #ffcc66';
+}
+document.querySelectorAll('._fore').forEach(styleForeElement);
+const observerFore = new MutationObserver(mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType === 1) {
+        if (node.classList.contains('_fore')) {
+          styleForeElement(node);
+        }
+        node.querySelectorAll('._fore').forEach(styleForeElement);
+      }
+    }
+  }
 });
+observerFore.observe(document.body, { childList: true, subtree: true });

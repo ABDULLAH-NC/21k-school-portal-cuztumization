@@ -397,9 +397,4 @@ function stylePurpleCalendar(el) {
   el.style.background = 'none';
 }
 
-// 🔮 widget-title background only
-function stylePurpleWidgetTitle(el) {
-  el.style.background = 'linear-gradient(90deg, #1a001a, #8000ff)';
-}
-
 

@@ -402,30 +402,4 @@ function stylePurpleWidgetTitle(el) {
   el.style.background = 'linear-gradient(90deg, #1a001a, #8000ff)';
 }
 
-// 🔁 Mutation Observer for all
-function applyPurpleStyles() {
-  document.querySelectorAll('._day').forEach(stylePurpleDay);
-  document.querySelectorAll('._note').forEach(stylePurpleNote);
-  document.querySelectorAll('.fa-calendar-alt').forEach(stylePurpleCalendar);
-  document.querySelectorAll('.widget-title').forEach(stylePurpleWidgetTitle);
-}
-applyPurpleStyles();
 
-const purpleObserver = new MutationObserver(mutations => {
-  for (const mutation of mutations) {
-    for (const node of mutation.addedNodes) {
-      if (node.nodeType !== 1) continue;
-
-      if (node.classList.contains('_day')) stylePurpleDay(node);
-      if (node.classList.contains('_note')) stylePurpleNote(node);
-      if (node.classList.contains('fa-calendar-alt')) stylePurpleCalendar(node);
-      if (node.classList.contains('widget-title')) stylePurpleWidgetTitle(node);
-
-      node.querySelectorAll('._day').forEach(stylePurpleDay);
-      node.querySelectorAll('._note').forEach(stylePurpleNote);
-      node.querySelectorAll('.fa-calendar-alt').forEach(stylePurpleCalendar);
-      node.querySelectorAll('.widget-title').forEach(stylePurpleWidgetTitle);
-    }
-  }
-});
-purpleObserver.observe(document.body, { childList: true, subtree: true });
